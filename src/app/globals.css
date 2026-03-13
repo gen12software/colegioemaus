@@ -1,43 +1,54 @@
-/* stylelint-disable */
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  --background: #001a35;
+  --foreground: #ffffff;
   
-  /* Colegio Emaús Elite Tokens */
-  --brand-primary: #002147; /* Oxford Blue style */
-  --brand-secondary: #003366;
-  --brand-accent: #c5a059; /* Elite Gold */
-  --brand-silver: #e2e8f0;
+  /* Colegio Emaús Brand Colors - Raw Variables for JS/Framer */
+  --brand-primary: #001a35;
+  --brand-secondary: #002d5b;
+  --brand-accent: #c5a059;
+  --brand-silver: #f1f5f9;
   
-  /* Levels Sophisticated Palettes */
+  /* Levels Palette */
   --nivel-jardin: #d97706;
   --nivel-primaria: #be123c;
   --nivel-secundaria: #6d28d9;
   --nivel-tecnica: #0891b2;
+
   --font-inter: var(--font-inter);
   --font-outfit: var(--font-outfit);
 }
 
-
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: var(--brand-primary);
+  color: white;
   font-family: var(--font-inter), ui-sans-serif, system-ui;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
+  font-family: var(--font-outfit);
+  letter-spacing: -0.05em;
 }
 
-/* Nuclear fix for dev indicators */
-#next-dev-tools, 
-[data-nextjs-toast], 
-[data-nextjs-build-indicator],
-[data-nextjs-portal] {
-  display: none !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
+/* Custom Utilities for Premium Look */
+.glass-panel {
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.text-gradient-gold {
+  background-image: linear-gradient(to bottom, var(--brand-accent), #e5c07b, var(--brand-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }

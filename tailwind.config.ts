@@ -9,14 +9,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "var(--brand-primary)",
-        secondary: "var(--brand-secondary)",
-        accent: "var(--brand-accent)",
-        silver: "var(--brand-silver)",
-        "nivel-jardin": "var(--nivel-jardin)",
-        "nivel-primaria": "var(--nivel-primaria)",
-        "nivel-secundaria": "var(--nivel-secundaria)",
-        "nivel-tecnica": "var(--nivel-tecnica)",
+        primary: "#001a35",
+        secondary: "#002d5b",
+        accent: "#c5a059",
+        silver: "#f1f5f9",
+        "nivel-jardin": "#d97706",
+        "nivel-primaria": "#be123c",
+        "nivel-secundaria": "#6d28d9",
+        "nivel-tecnica": "#0891b2",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "ui-sans-serif", "system-ui"],

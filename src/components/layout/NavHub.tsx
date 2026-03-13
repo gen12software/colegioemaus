@@ -1,17 +1,17 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowRight } from "lucide-react";
+import { X, ArrowRight, Instagram, Facebook, Linkedin } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
 const links = [
   { name: "Inicio", href: "/", description: "Volver a la experiencia principal." },
-  { name: "Niveles Educativos", href: "/niveles", description: "Desde Jardín hasta la Escuela Técnica." },
   { name: "Institucional", href: "/institucional", description: "Nuestra historia, misión y valores." },
-  { name: "Admisiones", href: "/admision", description: "Sé parte de nuestra comunidad 2026." },
+  { name: "Niveles", href: "#", description: "Propuesta educativa desde Jardín hasta Técnica." },
+  { name: "Administración", href: "/administracion", description: "Gestión, aranceles y trámites." },
   { name: "Pastoral", href: "/pastoral", description: "Formando el corazón y el espíritu." },
-  { name: "Escuela Técnica", href: "/niveles/tecnica", description: "Innovación y futuro profesional." },
+  { name: "Vida Escolar", href: "/vida-escolar", description: "Deportes, arte y proyectos." },
   { name: "Contacto", href: "/contacto", description: "Estamos aquí para escucharte." },
 ];
 
@@ -27,101 +27,127 @@ export default function NavHub({ isOpen, onClose }: NavHubProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 1.1 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-100 bg-primary flex items-center justify-center p-8 md:p-24"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-100 bg-[#001a35] overflow-hidden"
         >
-          {/* Background Background Pattern */}
-          <div className="absolute inset-0 z-0 opacity-10">
-             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_20%,var(--color-accent)_0%,transparent_50%)]" />
+          {/* Subtle Background Pattern */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-l from-white/2 to-transparent" />
+            <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#c5a059]/5 blur-[120px] rounded-full" />
           </div>
 
-          <button 
-            onClick={onClose}
-            className="absolute top-10 right-10 text-white/50 hover:text-white transition-colors group"
-          >
-            <X className="w-10 h-10 group-hover:rotate-90 transition-transform duration-500" />
-          </button>
+          <div className="relative z-10 h-full flex flex-col md:flex-row">
+            {/* Left Column: Navigation links */}
+            <div className="w-full md:w-3/5 h-full flex flex-col justify-center px-8 md:px-24 py-20 overflow-y-auto">
+              <nav className="space-y-4">
+                {links.map((link, index) => (
+                  <motion.div
+                    key={link.name}
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 + 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={onClose}
+                      onMouseEnter={() => setHoveredLink(link.name)}
+                      onMouseLeave={() => setHoveredLink(null)}
+                      className="group flex items-center gap-6"
+                    >
+                      <span className="text-[10px] font-mono text-[#c5a059]/40 font-bold tracking-widest mt-2 hidden md:block">
+                        0{index + 1}
+                      </span>
+                      <span className="text-4xl md:text-6xl font-display font-medium text-white/30 group-hover:text-white transition-all duration-500 tracking-tighter relative">
+                        {link.name}
+                        {/* Underline anim */}
+                        <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#c5a059] group-hover:w-full transition-all duration-500" />
+                      </span>
+                      <ArrowRight className="w-6 h-6 text-[#c5a059] opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all duration-500" />
+                    </Link>
+                  </motion.div>
+                ))}
+              </nav>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center max-w-7xl w-full relative z-10">
-            {/* Left: Interactive Links */}
-            <div className="space-y-4">
-              {links.map((link, index) => (
-                <motion.div
-                  key={link.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 + 0.3 }}
+              {/* Mobile Footer (Socials) */}
+              <div className="mt-12 flex gap-6 md:hidden">
+                <Instagram className="w-5 h-5 text-white/40" />
+                <Facebook className="w-5 h-5 text-white/40" />
+              </div>
+            </div>
+
+            {/* Right Column: Content Preview & Info */}
+            <div className="hidden md:flex w-2/5 h-full bg-white/2 border-l border-white/5 flex-col justify-between p-24">
+              <div className="flex justify-end">
+                <button 
+                  onClick={onClose}
+                  className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/5 transition-all group"
                 >
-                  <Link
-                    href={link.href}
-                    onClick={onClose}
-                    onMouseEnter={() => setHoveredLink(link.name)}
-                    onMouseLeave={() => setHoveredLink(null)}
-                    className="group flex items-end gap-6 text-4xl md:text-7xl font-display font-medium text-white/40 hover:text-white transition-all tracking-tighter"
-                  >
-                    <span className="text-sm font-mono text-accent mb-2 md:mb-5 opacity-0 group-hover:opacity-100 transition-opacity">
-                      0{index + 1}
-                    </span>
-                    {link.name}
-                    <ArrowRight className="w-8 h-8 md:w-12 md:h-12 mb-2 md:mb-5 opacity-0 group-hover:opacity-100 translate-x-[-20px] group-hover:translate-x-0 transition-all text-accent" />
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
+                  <X className="w-6 h-6 group-hover:rotate-90 transition-transform duration-500" />
+                </button>
+              </div>
 
-            {/* Right: Dynamic Contextual Preview */}
-            <div className="hidden md:block relative aspect-square">
-              <AnimatePresence mode="wait">
-                {hoveredLink ? (
-                  <motion.div
-                    key={hoveredLink}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className="absolute inset-0 flex flex-col justify-center"
-                  >
-                    <div className="w-full aspect-video bg-white/5 rounded-3xl mb-12 overflow-hidden border border-white/10">
-                       {/* Contextual Image would go here */}
-                       <div className="w-full h-full bg-linear-to-br from-accent/20 to-primary flex items-center justify-center">
-                          <span className="text-accent text-8xl font-black opacity-20">{hoveredLink[0]}</span>
-                       </div>
-                    </div>
-                    <p className="text-3xl text-white font-display leading-tight mb-4">
-                      {links.find(l => l.name === hoveredLink)?.description}
-                    </p>
-                    <div className="h-1 w-24 bg-accent" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="absolute inset-0 flex flex-col justify-center border-l border-white/10 pl-24"
-                  >
-                    <h3 className="text-xl font-bold uppercase tracking-widest mb-8 text-accent/50">Colegio Emaús</h3>
-                    <div className="space-y-6">
+              <div className="relative">
+                <AnimatePresence mode="wait">
+                  {hoveredLink ? (
+                    <motion.div
+                      key={hoveredLink}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="space-y-6"
+                    >
+                      <div className="text-[#c5a059] text-[10px] font-bold tracking-[0.4em] uppercase">Explorar Sección</div>
+                      <p className="text-4xl text-white font-display leading-tight tracking-tight">
+                        {links.find(l => l.name === hoveredLink)?.description}
+                      </p>
+                      <div className="w-12 h-px bg-[#c5a059]" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="space-y-10"
+                    >
                       <div>
-                        <span className="block text-white/40 text-xs uppercase tracking-wider mb-2">Ubicación</span>
-                        <span className="text-white text-lg">Leandro N. Alem 950, El Palomar</span>
+                        <div className="text-[#c5a059] text-[10px] font-bold tracking-[0.4em] uppercase mb-4">Ubicación</div>
+                        <p className="text-xl text-white/80 font-light leading-relaxed">
+                          Leandro N. Alem 950,<br />
+                          El Palomar, Buenos Aires
+                        </p>
                       </div>
                       <div>
-                        <span className="block text-white/40 text-xs uppercase tracking-wider mb-2">Contacto</span>
-                        <span className="text-white text-lg">+54 (11) 4751-0125</span>
+                        <div className="text-[#c5a059] text-[10px] font-bold tracking-[0.4em] uppercase mb-4">Admisiones</div>
+                        <p className="text-xl text-white/80 font-light">admisiones@colegioemaus.edu.ar</p>
                       </div>
-                      <div className="pt-12">
-                         <div className="text-8xl font-black text-white/5 font-display select-none">1961</div>
+                      <div className="flex gap-6">
+                        <Instagram className="w-5 h-5 text-[#c5a059] hover:text-white cursor-pointer transition-colors" />
+                        <Facebook className="w-5 h-5 text-[#c5a059] hover:text-white cursor-pointer transition-colors" />
+                        <Linkedin className="w-5 h-5 text-[#c5a059] hover:text-white cursor-pointer transition-colors" />
                       </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                
+                {/* 1961 Watermark */}
+                <div className="absolute -bottom-10 -right-10 text-[180px] font-black text-white/2 select-none pointer-events-none font-display">
+                  1961
+                </div>
+              </div>
+
+              <div className="text-[10px] text-white/20 font-mono tracking-widest uppercase">
+                Excelencia Educativa desde hace más de 60 años
+              </div>
             </div>
-          </div>
-          
-          <div className="absolute bottom-10 left-10 md:left-24 text-white/20 text-xs font-mono tracking-widest uppercase">
-            &copy; 2026 Colegio Emaús &bull; Avanzando hacia el futuro
+            
+            {/* Mobile close button */}
+            <button 
+              onClick={onClose}
+              className="md:hidden absolute top-8 right-8 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white"
+            >
+              <X className="w-6 h-6" />
+            </button>
           </div>
         </motion.div>
       )}
