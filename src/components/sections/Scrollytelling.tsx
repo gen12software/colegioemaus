@@ -2,37 +2,46 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import Image from "next/image";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { ChevronRight } from "lucide-react";
 
 const stages = [
   {
+    id: "jardin",
     title: "Jardín de Infantes",
-    subtitle: "El inicio del asombro",
-    description: "Donde cada juego es un descubrimiento y cada descubrimiento es un paso hacia el futuro.",
-    color: "var(--nivel-jardin)",
-    image: "/images/jardin.png"
+    subtitle: "El Inicio del Asombro",
+    description: "Un espacio diseñado para el juego libre y dirigido, donde la curiosidad natural del niño es el motor de su primer gran aprendizaje.",
+    color: "#d97706",
+    image: "/images/jardin.png",
+    href: "/niveles/jardin"
   },
   {
+    id: "primaria",
     title: "Escuela Primaria",
-    subtitle: "Cimientos de excelencia",
-    description: "Desarrollo integral con enfoque bilingüe y formación en valores humanos y cristianos.",
-    color: "var(--nivel-primaria)",
-    image: "/images/primaria.png"
+    subtitle: "Cimientos de Excelencia",
+    description: "Formación integral con enfoque bilingüe, robótica y valores cristianos. Preparamos ciudadanos del mundo con bases sólidas.",
+    color: "#be123c",
+    image: "/images/primaria.png",
+    href: "/niveles/primaria"
   },
   {
+    id: "secundaria",
     title: "Escuela Secundaria",
-    subtitle: "Forjando el carácter",
-    description: "Bachilleratos orientados que preparan a nuestros jóvenes para la vida universitaria.",
-    color: "var(--nivel-secundaria)",
-    image: "/images/secundaria.png"
+    subtitle: "Liderazgo de Futuro",
+    description: "Bachilleratos con orientación técnica y pedagógica. Fomentamos el pensamiento crítico y la autonomía universitaria.",
+    color: "#6d28d9",
+    image: "/images/secundaria.png",
+    href: "/niveles/secundaria"
   },
   {
+    id: "tecnica",
     title: "Técnico Profesional",
-    subtitle: "Liderazgo Tecnológico",
-    description: "Especialización técnica de vanguardia con laboratorios y talleres de última generación.",
-    color: "var(--nivel-tecnica)",
-    image: "/images/tecnica.png"
+    subtitle: "Maestría Tecnológica",
+    description: "Especialización de vanguardia en Informática y Electromecánica. Laboratorios propios y convenios con empresas líderes.",
+    color: "#0891b2",
+    image: "/images/tecnica.png",
+    href: "/niveles/tecnica"
   }
 ];
 
@@ -44,9 +53,8 @@ export default function Scrollytelling() {
   });
 
   return (
-    <section ref={containerRef} className="relative h-[400vh] bg-primary">
-      {/* Sticky content container */}
-      <div className="sticky top-20 h-[calc(100vh-80px)] overflow-hidden">
+    <section ref={containerRef} className="relative h-[450vh] bg-[#001122]">
+      <div className="sticky top-0 h-screen overflow-hidden">
         {stages.map((stage, index) => {
           const start = index / stages.length;
           const end = (index + 1) / stages.length;
@@ -56,67 +64,91 @@ export default function Scrollytelling() {
           // eslint-disable-next-line react-hooks/rules-of-hooks
           const scale = useTransform(scrollYProgress, [start, end], [1.1, 1]);
           // eslint-disable-next-line react-hooks/rules-of-hooks
-          const xText = useTransform(scrollYProgress, [start, start + 0.1], [50, 0]);
+          const textY = useTransform(scrollYProgress, [start, start + 0.15], [60, 0]);
 
           return (
             <motion.div
-              key={stage.title}
+              key={stage.id}
               style={{ opacity }}
-              className="absolute inset-0 flex flex-col md:flex-row items-center justify-between px-8 md:px-24"
+              className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
-              {/* Image Visual with Glassmorphism Overlay */}
-              <div className="w-full md:w-1/2 h-1/2 md:h-2/3 relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
-                <motion.img
-                  style={{ scale }}
-                  src={stage.image}
-                  alt={stage.title}
-                  className="w-full h-full object-cover transition-all duration-700"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-primary/80 via-transparent to-transparent" />
-                <div 
-                  className="absolute top-6 left-6 w-16 h-16 rounded-2xl flex items-center justify-center text-3xl font-bold text-white shadow-xl backdrop-blur-md border border-white/20"
-                  style={{ backgroundColor: `${stage.color}44` }} // Semi-transparent
-                >
-                  {stage.title[0]}
+              <div className="max-w-7xl mx-auto w-full px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                {/* Visual Content */}
+                <div className="relative aspect-4/5 md:aspect-video lg:aspect-square rounded-[3rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border border-white/5 pointer-events-auto">
+                    <motion.img
+                      style={{ scale }}
+                      src={stage.image}
+                      alt={stage.title}
+                      className="w-full h-full object-cover"
+                    />
+                    {/* Dynamic Overlay per Stage */}
+                    <div className="absolute inset-0 bg-linear-to-t from-[#001122] via-transparent to-transparent opacity-60" />
+                    <div 
+                        className="absolute top-10 left-10 w-20 h-20 rounded-3xl backdrop-blur-2xl border border-white/20 flex items-center justify-center text-4xl font-bold text-white shadow-2xl"
+                        style={{ background: `${stage.color}22` }}
+                    >
+                        {stage.title[0]}
+                    </div>
                 </div>
-              </div>
 
-              {/* Text Narrative */}
-              <motion.div 
-                style={{ x: xText }}
-                className="w-full md:w-1/3 text-left py-12 md:py-0"
-              >
-                <motion.span 
-                   className="text-accent font-bold tracking-[0.3em] uppercase text-xs mb-4 block"
+                {/* Narrative Content */}
+                <motion.div 
+                    style={{ y: textY }}
+                    className="space-y-8 pointer-events-auto"
                 >
-                  {stage.subtitle}
-                </motion.span>
-                <h2 className="text-4xl md:text-6xl font-display font-medium text-white mb-6 leading-tight">
-                  {stage.title}
-                </h2>
-                <p className="text-white/60 text-lg leading-relaxed mb-10 max-w-sm">
-                  {stage.description}
-                </p>
-                <button className="px-8 py-3 rounded-full border border-white/20 text-white hover:bg-white hover:text-primary transition-all font-semibold">
-                  Descubrir {stage.title.split(' ')[1] || stage.title}
-                </button>
-              </motion.div>
+                    <div>
+                        <span 
+                            className="text-accent font-bold tracking-[0.5em] uppercase text-xs mb-4 block"
+                        >
+                            {stage.subtitle}
+                        </span>
+                        <h2 className="text-5xl md:text-8xl font-display font-medium text-white mb-8 leading-none tracking-tighter">
+                            {stage.title}
+                        </h2>
+                        <p className="text-white/60 text-lg md:text-xl leading-relaxed max-w-xl font-light">
+                            {stage.description}
+                        </p>
+                    </div>
 
-              {/* Vertical Progress Indicator (Inside each slide) */}
-              <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-8 items-center">
-                {stages.map((_, i) => (
-                  <div 
-                    key={i} 
-                    className={cn(
-                      "w-1 h-8 rounded-full transition-all duration-500",
-                      i === index ? "bg-accent scale-y-150" : "bg-white/20"
-                    )} 
-                  />
-                ))}
+                    <div className="flex flex-wrap gap-8 items-center pt-8">
+                        <Link 
+                            href={stage.href}
+                            className="px-10 py-5 rounded-2xl bg-white text-primary font-bold hover:bg-accent hover:text-white transition-all shadow-xl flex items-center gap-3 group"
+                        >
+                            Ver Plan de Estudios
+                            <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-all" />
+                        </Link>
+                        <div className="hidden md:flex items-center gap-4 text-white/30 text-xs font-mono uppercase tracking-widest">
+                            <span className="w-8 h-px bg-white/10" />
+                            Explorar Nivel 0{index + 1}
+                        </div>
+                    </div>
+                </motion.div>
               </div>
             </motion.div>
           );
         })}
+
+        {/* Vertical Stage Navigation/Indicator */}
+        <div className="absolute right-12 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-12 z-30">
+            {stages.map((_, i) => {
+                const start = i / stages.length;
+                const end = (i + 1) / stages.length;
+                // eslint-disable-next-line react-hooks/rules-of-hooks
+                const dashScale = useTransform(scrollYProgress, [start, start + 0.1, end - 0.1, end], [1, 1.8, 1.8, 1]);
+                // eslint-disable-next-line react-hooks/rules-of-hooks
+                const dotColor = useTransform(scrollYProgress, [start, start + 0.1, end - 0.1, end], ["#ffffff22", "#c5a059", "#c5a059", "#ffffff22"]);
+
+                return (
+                    <div key={i} className="flex flex-col items-center gap-2">
+                        <motion.div 
+                            style={{ height: 40, width: 2, scaleY: dashScale, background: dotColor }}
+                            className="rounded-full origin-center"
+                        />
+                    </div>
+                );
+            })}
+        </div>
       </div>
     </section>
   );

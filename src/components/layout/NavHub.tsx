@@ -30,11 +30,11 @@ export default function NavHub({ isOpen, onClose }: NavHubProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[100] bg-[#001a35] overflow-hidden"
+          className="fixed inset-0 z-100 bg-[#001a35] overflow-hidden"
         >
           {/* Subtle Background Pattern */}
           <div className="absolute inset-0 z-0">
-            <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/[0.02] to-transparent" />
+            <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-l from-white/2 to-transparent" />
             <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#c5a059]/5 blur-[120px] rounded-full" />
           </div>
 
@@ -78,7 +78,7 @@ export default function NavHub({ isOpen, onClose }: NavHubProps) {
             </div>
 
             {/* Right Column: Content Preview & Info */}
-            <div className="hidden md:flex w-2/5 h-full bg-white/[0.02] border-l border-white/5 flex-col justify-between p-24">
+            <div className="hidden md:flex w-2/5 h-full bg-white/2 border-l border-white/5 flex-col justify-between p-24">
               <div className="flex justify-end">
                 <button 
                   onClick={onClose}
@@ -102,7 +102,7 @@ export default function NavHub({ isOpen, onClose }: NavHubProps) {
                       <p className="text-4xl text-white font-display leading-tight tracking-tight">
                         {links.find(l => l.name === hoveredLink)?.description}
                       </p>
-                      <div className="w-12 h-[1px] bg-[#c5a059]" />
+                      <div className="w-12 h-px bg-[#c5a059]" />
                     </motion.div>
                   ) : (
                     <motion.div
@@ -131,7 +131,7 @@ export default function NavHub({ isOpen, onClose }: NavHubProps) {
                 </AnimatePresence>
                 
                 {/* 1961 Watermark */}
-                <div className="absolute -bottom-10 -right-10 text-[180px] font-black text-white/[0.02] select-none pointer-events-none font-display">
+                <div className="absolute -bottom-10 -right-10 text-[180px] font-black text-white/2 select-none pointer-events-none font-display">
                   1961
                 </div>
               </div>
