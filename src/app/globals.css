@@ -1,29 +1,33 @@
-/* stylelint-disable */
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  --background: #002147;
+  --foreground: #ffffff;
   
-  /* Colegio Emaús Elite Tokens */
-  --brand-primary: #002147; /* Oxford Blue style */
-  --brand-secondary: #003366;
-  --brand-accent: #c5a059; /* Elite Gold */
-  --brand-silver: #e2e8f0;
+  /* Colegio Emaús Elite Tokens - Tailwind v4 Auto-mapping */
+  --color-primary: #002147;
+  --color-secondary: #003366;
+  --color-accent: #c5a059;
+  --color-silver: #e2e8f0;
   
-  /* Levels Sophisticated Palettes */
-  --nivel-jardin: #d97706;
-  --nivel-primaria: #be123c;
-  --nivel-secundaria: #6d28d9;
-  --nivel-tecnica: #0891b2;
+  --color-nivel-jardin: #d97706;
+  --color-nivel-primaria: #be123c;
+  --color-nivel-secundaria: #6d28d9;
+  --color-nivel-tecnica: #0891b2;
+
+  /* Aliases for manual var() usage */
+  --nivel-jardin: var(--color-nivel-jardin);
+  --nivel-primaria: var(--color-nivel-primaria);
+  --nivel-secundaria: var(--color-nivel-secundaria);
+  --nivel-tecnica: var(--color-nivel-tecnica);
+
   --font-inter: var(--font-inter);
   --font-outfit: var(--font-outfit);
 }
 
-
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: var(--color-primary);
+  color: white;
   font-family: var(--font-inter), ui-sans-serif, system-ui;
   -webkit-font-smoothing: antialiased;
 }
