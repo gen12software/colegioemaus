@@ -96,57 +96,57 @@ export default function ResourceCenter() {
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="text-6xl md:text-9xl text-primary font-display font-medium leading-none tracking-tighter"
+              className="text-5xl md:text-7xl text-primary font-display font-medium leading-none tracking-tighter"
             >
               Trámites y <span className="italic text-secondary font-light">Recursos.</span>
             </motion.h2>
           </div>
           <div className="max-w-sm">
-            <p className="text-emaus-gray text-xl font-light leading-relaxed">
+            <p className="text-emaus-gray text-lg font-light leading-relaxed">
               Accedé a toda la documentación, listas de materiales y procesos de inscripción en un solo lugar.
             </p>
           </div>
         </div>
 
         {/* Procedures Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-40">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-32">
           {procedures.map((group, groupIdx) => (
             <div key={groupIdx}>
-              <h3 className="text-[11px] font-bold uppercase tracking-[0.4em] text-primary/30 mb-12 pl-4 border-l-2 border-accent">
+              <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary/30 mb-10 pl-4 border-l-2 border-accent">
                 {group.category}
               </h3>
-              <div className="flex flex-col gap-8">
+              <div className="flex flex-col gap-6">
                 {group.items.map((item, itemIdx) => (
                   <motion.div
                     key={itemIdx}
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ delay: itemIdx * 0.1 }}
-                    className="group relative bg-white p-10 md:p-14 rounded-[3rem] border border-slate-100 hover:border-primary/20 transition-all duration-700 hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.08)]"
+                    className="group relative bg-white p-8 md:p-10 rounded-4xl border border-slate-100 hover:border-primary/20 transition-all duration-700 hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.08)]"
                   >
-                    <div className="flex flex-col gap-10 relative z-10">
-                      <div className="flex items-start gap-10">
+                    <div className="flex flex-col gap-8 relative z-10">
+                      <div className="flex items-start gap-8">
                         <div className={cn(
-                          "w-24 h-24 rounded-[2rem] flex items-center justify-center text-white shrink-0 shadow-xl transition-all duration-700 group-hover:scale-110",
+                          "w-20 h-20 rounded-2xl flex items-center justify-center text-white shrink-0 shadow-xl transition-all duration-700 group-hover:scale-110",
                           item.color
                         )}>
-                          <item.icon className="w-12 h-12" />
+                          <item.icon className="w-10 h-10" />
                         </div>
                         <div className="flex-1">
-                          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-4 block">{item.tag}</span>
-                          <h4 className="text-3xl font-display font-bold text-primary mb-4 tracking-tight leading-tight">{item.title}</h4>
-                          <p className="text-emaus-gray text-lg font-light leading-relaxed">{item.description}</p>
+                          <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-accent mb-3 block">{item.tag}</span>
+                          <h4 className="text-2xl font-display font-medium text-primary mb-3 tracking-tight leading-tight">{item.title}</h4>
+                          <p className="text-emaus-gray text-base font-light leading-relaxed">{item.description}</p>
                         </div>
                       </div>
                       
-                      <div className="flex flex-col sm:flex-row items-center justify-between gap-8 pt-8 border-t border-slate-50">
+                      <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-6 border-t border-slate-50">
                         <div className="flex items-center gap-3">
-                           <div className="w-2 h-2 rounded-full bg-accent" />
-                           <span className="text-[10px] font-bold uppercase tracking-widest text-primary/40">{item.subtitle}</span>
+                           <div className="w-1.5 h-1.5 rounded-full bg-accent" />
+                           <span className="text-[9px] font-bold uppercase tracking-widest text-primary/40">{item.subtitle}</span>
                         </div>
-                        <button className="w-full sm:w-auto px-12 py-6 bg-primary text-white rounded-2xl text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-accent transition-all flex items-center justify-center gap-4 shadow-2xl shadow-primary/20 group/btn">
+                        <button className="w-full sm:w-auto px-10 py-5 bg-primary text-white rounded-xl text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-accent transition-all flex items-center justify-center gap-4 shadow-2xl shadow-primary/20 group/btn">
                           {item.label}
-                          {item.type === 'download' ? <Download className="w-5 h-5" /> : <ExternalLink className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />}
+                          {item.type === 'download' ? <Download className="w-4 h-4" /> : <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />}
                         </button>
                       </div>
                     </div>

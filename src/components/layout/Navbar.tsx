@@ -21,7 +21,15 @@ const navItems = [
   },
   { name: "Institucional", href: "/institucional" },
   { name: "Administración", href: "/administracion" },
-  { name: "Pastoral", href: "/pastoral" },
+  {
+    name: "Pastoral",
+    href: "#",
+    submenu: [
+      { name: "Catequesis", href: "/pastoral/catequesis", color: "bg-blue-600" },
+      { name: "Pastoral Social", href: "/pastoral/social", color: "bg-emerald-600" },
+      { name: "Comunidades", href: "/pastoral/comunidades", color: "bg-violet-600" },
+    ]
+  },
   { name: "Deporte y Arte", href: "/vida-escolar" },
   { name: "Contacto", href: "/contacto" },
 ];
@@ -47,7 +55,7 @@ export default function Navbar() {
       <NavHub isOpen={isHubOpen} onClose={() => setIsHubOpen(false)} />
       <nav
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-6 py-2 md:px-12",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-6 py-1 md:px-12",
           scrolled ? "bg-transparent" : "bg-primary/90 backdrop-blur-md"
         )}
       >
@@ -55,8 +63,8 @@ export default function Navbar() {
           className={cn(
             "mx-auto transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] flex items-center justify-between relative",
             scrolled
-              ? "max-w-[95%] lg:max-w-7xl bg-white/95 backdrop-blur-3xl border border-zinc-200 shadow-2xl rounded-full px-8 h-20 mt-4"
-              : "max-w-7xl bg-transparent px-4 h-24"
+              ? "max-w-[95%] lg:max-w-7xl bg-white/95 backdrop-blur-3xl border border-zinc-200 shadow-2xl rounded-full px-8 h-16 mt-4"
+              : "max-w-7xl bg-transparent px-4 h-20"
           )}
         >
           {/* 1. Left: Logo & Menu Trigger */}
@@ -64,19 +72,19 @@ export default function Navbar() {
             <button
               onClick={() => setIsHubOpen(true)}
               className={cn(
-                "p-3 rounded-2xl transition-all flex items-center gap-3 group",
+                "p-2.5 rounded-2xl transition-all flex items-center gap-3 group",
                 scrolled ? "hover:bg-zinc-100 text-primary" : "hover:bg-white/10 text-white"
               )}
             >
-              <Menu className="w-6 h-6" />
-              <div className="h-8 w-px bg-zinc-200 mx-2 hidden xl:block" />
+              <Menu className="w-5 h-5" />
+              <div className="h-6 w-px bg-zinc-200 mx-2 hidden xl:block" />
               <div className="flex items-center gap-3">
                 <Image 
                   src="/images/logo-emaus.png" 
                   alt="Colegio Emaús" 
-                  width={150} 
-                  height={50} 
-                  className="h-12 w-auto transition-all duration-500"
+                  width={140} 
+                  height={40} 
+                  className="h-10 w-auto transition-all duration-500"
                   priority
                 />
               </div>
@@ -160,7 +168,7 @@ export default function Navbar() {
           <Link
             href="/inscripciones"
             className={cn(
-              "px-8 py-4 rounded-2xl font-bold uppercase tracking-[0.2em] text-[10px] transition-all shadow-xl whitespace-nowrap",
+              "px-8 py-3 rounded-2xl font-bold uppercase tracking-[0.2em] text-[10px] transition-all shadow-xl whitespace-nowrap",
               scrolled
                 ? "bg-primary text-white hover:bg-accent shadow-primary/10"
                 : "bg-white text-primary hover:bg-accent hover:text-white shadow-2xl"

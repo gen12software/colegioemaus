@@ -45,12 +45,55 @@ const stages = [
   }
 ];
 
+import { useEffect, useState } from "react";
+
 export default function Scrollytelling() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
+
+  if (isMobile) {
+    return (
+      <section className="py-24 px-6 bg-[#0a0a0a] space-y-24">
+        <div className="max-w-7xl mx-auto space-y-32">
+          {stages.map((stage, index) => (
+            <div key={stage.id} className="space-y-12">
+              <div className="relative aspect-square rounded-4xl overflow-hidden shadow-2xl border border-white/5">
+                <img src={stage.image} alt={stage.title} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-linear-to-t from-primary via-transparent to-transparent opacity-60" />
+                <div className="absolute top-6 left-6 w-14 h-14 rounded-2xl backdrop-blur-xl border border-white/20 flex items-center justify-center text-xl font-bold text-white shadow-2xl" style={{ background: `${stage.color}44` }}>
+                  {stage.title[0]}
+                </div>
+              </div>
+              <div className="space-y-6">
+                <div>
+                  <span className="text-accent font-bold tracking-[0.4em] uppercase text-[10px] mb-4 block">{stage.subtitle}</span>
+                  <h2 className="text-4xl font-display font-medium text-white mb-6 tracking-tighter">{stage.title}</h2>
+                  <p className="text-white/60 text-base leading-relaxed font-light">{stage.description}</p>
+                </div>
+                <Link href={stage.href} className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-white text-primary font-bold uppercase tracking-widest text-[10px]">
+                  Ver Propuesta <ChevronRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section ref={containerRef} className="relative h-[450vh] bg-[#0a0a0a]">
@@ -72,9 +115,9 @@ export default function Scrollytelling() {
               style={{ opacity }}
               className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
-              <div className="max-w-7xl mx-auto w-full px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+              <div className="max-w-7xl mx-auto w-full px-6 grid grid-cols-2 gap-20 items-center">
                 {/* Visual Content */}
-                <div className="relative aspect-4/5 md:aspect-video lg:aspect-square rounded-4xl overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border border-white/5 pointer-events-auto">
+                <div className="relative aspect-square rounded-4xl overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border border-white/5 pointer-events-auto">
                     <motion.img
                       style={{ scale }}
                       src={stage.image}
@@ -102,10 +145,10 @@ export default function Scrollytelling() {
                         >
                             {stage.subtitle}
                         </span>
-                        <h2 className="text-5xl md:text-8xl font-display font-medium text-white mb-8 leading-none tracking-tighter">
+                        <h2 className="text-4xl md:text-6xl font-display font-medium text-white mb-8 leading-none tracking-tighter">
                             {stage.title}
                         </h2>
-                        <p className="text-white/60 text-lg md:text-xl leading-relaxed max-w-xl font-light">
+                        <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-xl font-light">
                             {stage.description}
                         </p>
                     </div>

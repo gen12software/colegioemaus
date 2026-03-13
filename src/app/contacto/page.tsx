@@ -42,9 +42,9 @@ export default function ContactoPage() {
 
               <div className="space-y-4">
                 {[
-                  { icon: MapPin, title: "Nuestra Sede", value: "Leandro N. Alem 950, El Palomar", color: "bg-blue-50 text-secondary" },
-                  { icon: Phone, title: "Llamanos", value: "+54 (11) 4751-0125 / 4758-2950", color: "bg-amber-50 text-amber-600" },
-                  { icon: Mail, title: "Escribinos", value: "info@colegioemaus.edu.ar", color: "bg-emerald-50 text-emerald-600" },
+                  { icon: MapPin, title: "Nuestra Sede", value: "Leones 967, El Palomar", color: "bg-blue-50 text-secondary" },
+                  { icon: Phone, title: "Llamanos", value: "(011) 6841-0266", color: "bg-amber-50 text-amber-600" },
+                  { icon: Mail, title: "Escribinos", value: "emaus@colegioemaus.edu.ar", color: "bg-emerald-50 text-emerald-600" },
                   { icon: Clock, title: "Horarios", value: "Lun a Vie: 08:00 — 17:00 hs", color: "bg-violet-50 text-violet-600" },
                 ].map((item, i) => (
                   <motion.div
@@ -157,7 +157,7 @@ export default function ContactoPage() {
                 <MapPin className="w-5 h-5 text-white" />
               </div>
               <h4 className="text-2xl font-display font-bold text-primary mb-2 tracking-tight">Colegio Emaús</h4>
-              <p className="text-emaus-gray font-light mb-6">Leandro N. Alem 950, El Palomar</p>
+              <p className="text-emaus-gray font-light mb-6">Leones 967, El Palomar</p>
               <Link
                 href="https://maps.google.com"
                 target="_blank"

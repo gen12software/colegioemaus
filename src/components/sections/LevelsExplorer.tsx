@@ -70,7 +70,7 @@ export default function LevelsExplorer() {
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-6xl md:text-8xl text-white font-display font-medium leading-none tracking-tighter"
+            className="text-4xl md:text-6xl text-white font-display font-medium leading-none tracking-tighter"
           >
             Nuestros <span className="italic text-secondary font-light">Niveles.</span>
           </motion.h2>
@@ -78,13 +78,13 @@ export default function LevelsExplorer() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Navigation Tabs */}
-          <div className="lg:col-span-4 flex flex-col gap-4">
+          <div className="lg:col-span-4 flex flex-col gap-3">
             {levels.map((level, index) => (
               <button
                 key={level.id}
                 onClick={() => setActiveTab(index)}
                 className={cn(
-                  "group relative p-8 rounded-3xl transition-all duration-500 text-left border overflow-hidden",
+                  "group relative p-6 rounded-3xl transition-all duration-500 text-left border overflow-hidden",
                   activeTab === index 
                     ? "bg-white border-white shadow-2xl scale-[1.02]" 
                     : "bg-white/5 border-white/10 hover:bg-white/10"
@@ -92,13 +92,13 @@ export default function LevelsExplorer() {
               >
                 <div className="relative z-10">
                     <span className={cn(
-                        "text-[10px] uppercase font-bold tracking-widest mb-2 block",
+                        "text-[9px] uppercase font-bold tracking-widest mb-1.5 block",
                         activeTab === index ? "text-accent" : "text-white/40"
                     )}>
                         Nivel 0{index + 1}
                     </span>
                     <h3 className={cn(
-                        "text-2xl font-display font-medium transition-colors",
+                        "text-lg font-display font-medium transition-colors",
                         activeTab === index ? "text-primary" : "text-white"
                     )}>
                         {level.title}
@@ -115,7 +115,7 @@ export default function LevelsExplorer() {
           </div>
 
           {/* Content Display */}
-          <div className="lg:col-span-8 min-h-[600px] relative">
+          <div className="lg:col-span-8 min-h-[500px] relative">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
@@ -133,10 +133,10 @@ export default function LevelsExplorer() {
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-primary via-transparent to-transparent opacity-60" />
-                    <div className="absolute bottom-10 left-10 p-6 backdrop-blur-xl bg-white/10 rounded-3xl border border-white/20">
+                    <div className="absolute bottom-10 left-10 p-4 backdrop-blur-xl bg-white/10 rounded-2xl border border-white/20">
                         <div className="flex gap-2">
                             {levels[activeTab].features.map(f => (
-                                <span key={f} className="text-[8px] font-bold uppercase tracking-widest text-white/80 bg-primary/40 px-3 py-1.5 rounded-full border border-white/10">
+                                <span key={f} className="text-[7px] font-bold uppercase tracking-widest text-white/80 bg-primary/40 px-2.5 py-1 rounded-full border border-white/10">
                                     {f}
                                 </span>
                             ))}
@@ -145,15 +145,15 @@ export default function LevelsExplorer() {
                 </div>
 
                 {/* Info Section */}
-                <div className="flex flex-col justify-center gap-10">
+                <div className="flex flex-col justify-center gap-8">
                    <div>
-                        <span className="text-accent font-bold tracking-[0.3em] uppercase text-[10px] mb-4 block">
+                        <span className="text-accent font-bold tracking-[0.3em] uppercase text-[9px] mb-4 block">
                             {levels[activeTab].subtitle}
                         </span>
-                        <h3 className="text-5xl font-display font-medium text-white mb-8 leading-tight tracking-tight">
+                        <h3 className="text-3xl md:text-4xl font-display font-medium text-white mb-6 leading-tight tracking-tight">
                             Educación que <br/> <span className="italic text-secondary font-light">trasciende.</span>
                         </h3>
-                        <p className="text-white/60 text-xl leading-relaxed font-light">
+                        <p className="text-white/60 text-base md:text-lg leading-relaxed font-light">
                             {levels[activeTab].description}
                         </p>
                    </div>

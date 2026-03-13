@@ -35,7 +35,7 @@ export default function PageHeader({ title, subtitle, image, className }: PageHe
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <h1 className="text-6xl md:text-8xl font-display font-medium text-white leading-none mb-6 tracking-tighter">
+          <h1 className="text-5xl md:text-6xl font-display font-medium text-white leading-none mb-6 tracking-tighter">
             {title}
           </h1>
           {subtitle && (

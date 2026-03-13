@@ -35,7 +35,7 @@ export default function Home() {
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="text-6xl md:text-[10rem] text-primary font-display font-medium leading-[0.75] tracking-tighter max-w-5xl"
+              className="text-4xl md:text-7xl text-primary font-display font-medium leading-[0.9] tracking-tighter max-w-5xl"
             >
               Excelencia que se vive en cada <span className="text-secondary italic font-light">detalle.</span>
             </motion.h2>
@@ -59,7 +59,7 @@ export default function Home() {
                   <div className="w-10 h-px bg-accent group-hover:w-16 transition-all duration-700" />
                   <h3 className="text-xs uppercase tracking-[0.3em] font-bold text-primary">{item.title}</h3>
                 </div>
-                <p className="text-primary/60 text-lg font-light leading-relaxed">
+                <p className="text-primary/60 text-base font-light leading-relaxed">
                   {item.desc}
                 </p>
               </motion.div>
@@ -77,10 +77,10 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 1.2 }}
           >
-            <h2 className="text-7xl md:text-[14rem] font-display font-medium text-primary mb-16 tracking-tighter leading-[0.7]">
+            <h2 className="text-6xl md:text-8xl font-display font-medium text-primary mb-12 tracking-tighter leading-[0.8]">
               Forjamos <br /> <span className="text-secondary italic font-extralight">Legados.</span>
             </h2>
-            <p className="text-2xl md:text-3xl text-primary/40 mb-32 max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-xl md:text-2xl text-primary/40 mb-20 max-w-2xl mx-auto font-light leading-relaxed">
               Vení a conocer nuestras instalaciones y descubrí por qué somos la elección de miles de familias.
             </p>
             <div className="flex flex-col sm:flex-row gap-10 justify-center items-center">

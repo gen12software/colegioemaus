@@ -8,9 +8,28 @@ import { useState } from "react";
 const links = [
   { name: "Inicio", href: "/", description: "Volver a la experiencia principal." },
   { name: "Institucional", href: "/institucional", description: "Nuestra historia, misión y valores." },
-  { name: "Niveles", href: "#", description: "Propuesta educativa desde Jardín hasta Técnica." },
+  { 
+    name: "Niveles", 
+    href: "#", 
+    description: "Propuesta educativa desde Jardín hasta Técnica.",
+    sublinks: [
+      { name: "Jardín de Infantes", href: "/niveles/jardin" },
+      { name: "Escuela Primaria", href: "/niveles/primaria" },
+      { name: "Escuela Secundaria", href: "/niveles/secundaria" },
+      { name: "Escuela Técnica", href: "/niveles/tecnica" },
+    ]
+  },
   { name: "Administración", href: "/administracion", description: "Gestión, aranceles y trámites." },
-  { name: "Pastoral", href: "/pastoral", description: "Formando el corazón y el espíritu." },
+  { 
+    name: "Pastoral", 
+    href: "/pastoral", 
+    description: "Formando el corazón y el espíritu.",
+    sublinks: [
+      { name: "Catequesis", href: "/pastoral/catequesis" },
+      { name: "Pastoral Social", href: "/pastoral/social" },
+      { name: "Comunidades", href: "/pastoral/comunidades" },
+    ]
+  },
   { name: "Vida Escolar", href: "/vida-escolar", description: "Deportes, arte y proyectos." },
   { name: "Contacto", href: "/contacto", description: "Estamos aquí para escucharte." },
 ];
@@ -87,14 +106,14 @@ export default function NavHub({ isOpen, onClose }: NavHubProps) {
                       <div>
                         <div className="text-secondary/60 text-[8px] font-bold tracking-[0.4em] uppercase mb-3">Ubicación</div>
                         <p className="text-sm lg:text-base text-white/70 font-light leading-relaxed">
-                          Leandro N. Alem 950,<br />
+                          Leones 967,<br />
                           <span className="text-white/30">El Palomar, Buenos Aires</span>
                         </p>
                       </div>
                       <div>
                         <div className="text-secondary/60 text-[8px] font-bold tracking-[0.4em] uppercase mb-3">Admisiones</div>
                         <p className="text-sm lg:text-base text-white/70 font-light hover:text-accent transition-colors cursor-pointer break-all">
-                          admisiones@colegioemaus.edu.ar
+                          emaus@colegioemaus.edu.ar
                         </p>
                       </div>
                       <div className="flex gap-5 items-center pt-1">
@@ -129,22 +148,49 @@ export default function NavHub({ isOpen, onClose }: NavHubProps) {
                     transition={{ delay: index * 0.04, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                     className="w-full flex md:justify-end"
                   >
-                    <Link
-                      href={link.href}
-                      onClick={onClose}
-                      onMouseEnter={() => setHoveredLink(link.name)}
-                      onMouseLeave={() => setHoveredLink(null)}
-                      className="group flex flex-row items-baseline gap-3 md:gap-4 transition-all duration-500 hover:md:translate-x-[-6px]"
-                    >
-                      <span className="text-[8px] md:text-[9px] font-mono text-accent/20 font-bold tracking-widest group-hover:text-accent transition-all duration-500 order-first md:order-last">
-                        0{index + 1}
-                      </span>
-                      <span className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-display font-medium text-white/20 group-hover:text-white transition-all duration-500 tracking-tight relative py-1 block leading-tight">
-                        {link.name}
-                        {/* Animated Accent Bar */}
-                        <span className="absolute left-0 bottom-0 h-px w-0 bg-accent group-hover:w-full transition-all duration-500 ease-out" />
-                      </span>
-                    </Link>
+                    <div className="flex flex-col items-start md:items-end w-full">
+                      <Link
+                        href={link.href}
+                        onClick={onClose}
+                        onMouseEnter={() => setHoveredLink(link.name)}
+                        onMouseLeave={() => setHoveredLink(null)}
+                        className="group flex flex-row items-baseline gap-3 md:gap-4 transition-all duration-500 hover:md:translate-x-[-6px]"
+                      >
+                        <span className="text-[8px] md:text-[9px] font-mono text-accent/20 font-bold tracking-widest group-hover:text-accent transition-all duration-500 order-first md:order-last">
+                          0{index + 1}
+                        </span>
+                        <span className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-display font-medium text-white/20 group-hover:text-white transition-all duration-500 tracking-tight relative py-1 block leading-tight">
+                          {link.name}
+                          {/* Animated Accent Bar */}
+                          <span className="absolute left-0 bottom-0 h-px w-0 bg-accent group-hover:w-full transition-all duration-500 ease-out" />
+                        </span>
+                      </Link>
+
+                      {/* Sublinks logic for NavHub */}
+                      <AnimatePresence>
+                        {link.sublinks && hoveredLink === link.name && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="flex flex-col items-start md:items-end gap-2 mt-2 mb-4 overflow-hidden"
+                            onMouseEnter={() => setHoveredLink(link.name)}
+                            onMouseLeave={() => setHoveredLink(null)}
+                          >
+                            {link.sublinks.map((sub) => (
+                              <Link
+                                key={sub.name}
+                                href={sub.href}
+                                onClick={onClose}
+                                className="text-xs md:text-sm font-light text-white/40 hover:text-accent transition-colors py-1"
+                              >
+                                {sub.name}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
                   </motion.div>
                 ))}
               </nav>
