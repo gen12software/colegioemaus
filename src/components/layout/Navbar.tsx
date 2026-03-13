@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,10 +13,10 @@ const navItems = [
     name: "Niveles",
     href: "#",
     submenu: [
-      { name: "Jardín de Infantes", href: "/niveles/jardin", color: "bg-amber-500" },
-      { name: "Escuela Primaria", href: "/niveles/primaria", color: "bg-rose-500" },
-      { name: "Escuela Secundaria", href: "/niveles/secundaria", color: "bg-violet-500" },
-      { name: "Escuela Téc. Profesional", href: "/niveles/tecnica", color: "bg-cyan-500" },
+      { name: "Jardín de Infantes", href: "/niveles/jardin", color: "bg-accent" },
+      { name: "Escuela Primaria", href: "/niveles/primaria", color: "bg-primary" },
+      { name: "Escuela Secundaria", href: "/niveles/secundaria", color: "bg-secondary" },
+      { name: "Escuela Téc. Profesional", href: "/niveles/tecnica", color: "bg-emaus-gray" },
     ]
   },
   { name: "Institucional", href: "/institucional" },
@@ -46,126 +47,127 @@ export default function Navbar() {
       <NavHub isOpen={isHubOpen} onClose={() => setIsHubOpen(false)} />
       <nav
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-6 py-4",
-          scrolled ? "md:px-12 md:py-4" : "md:px-12 md:py-8"
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-6 py-2 md:px-12",
+          scrolled ? "bg-transparent" : "bg-primary/90 backdrop-blur-md"
         )}
       >
         <div
           className={cn(
-            "max-w-7xl mx-auto rounded-3xl transition-all duration-500 px-8 py-4 flex justify-between items-center",
+            "mx-auto transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] flex items-center justify-between relative",
             scrolled
-              ? "bg-white/80 backdrop-blur-xl border border-zinc-200 shadow-2xl"
-              : "bg-transparent md:border-transparent"
+              ? "max-w-[95%] lg:max-w-7xl bg-white/95 backdrop-blur-3xl border border-zinc-200 shadow-2xl rounded-full px-8 h-20 mt-4"
+              : "max-w-7xl bg-transparent px-4 h-24"
           )}
         >
-          {/* Logo */}
-          <div className="shrink-0 flex items-center">
-            <Link href="/" className="flex flex-col group">
-              <span className={cn(
-                "font-display font-bold text-2xl tracking-tighter uppercase leading-none transition-colors",
-                scrolled ? "text-primary group-hover:text-accent" : "text-white group-hover:text-accent"
-              )}>
-                Colegio Emaús
-              </span>
-              <div className="flex items-center gap-2">
-                <div className="h-px w-4 bg-accent" />
-                <span className={cn(
-                  "text-[9px] font-bold tracking-[0.3em] uppercase transition-colors",
-                  scrolled ? "text-zinc-400" : "text-white/40"
-                )}>
-                  Fundación Padre Luis
-                </span>
+          {/* 1. Left: Logo & Menu Trigger */}
+          <div className="flex items-center gap-6">
+            <button
+              onClick={() => setIsHubOpen(true)}
+              className={cn(
+                "p-3 rounded-2xl transition-all flex items-center gap-3 group",
+                scrolled ? "hover:bg-zinc-100 text-primary" : "hover:bg-white/10 text-white"
+              )}
+            >
+              <Menu className="w-6 h-6" />
+              <div className="h-8 w-px bg-zinc-200 mx-2 hidden xl:block" />
+              <div className="flex items-center gap-3">
+                <Image 
+                  src="/images/logo-emaus.png" 
+                  alt="Colegio Emaús" 
+                  width={150} 
+                  height={50} 
+                  className="h-12 w-auto transition-all duration-500"
+                  priority
+                />
               </div>
-            </Link>
+            </button>
           </div>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:ml-6 md:flex md:space-x-12 items-center">
-            {navItems.map((item) => (
-              <div
-                key={item.name}
-                className="relative group h-full flex items-center"
-                onMouseEnter={() => setActiveSubmenu(item.submenu ? item.name : null)}
-                onMouseLeave={() => setActiveSubmenu(null)}
-              >
-                <Link
-                  href={item.href}
-                  className={cn(
-                    "transition-all py-2 text-[11px] uppercase tracking-[0.2em] font-bold flex items-center gap-2",
-                    scrolled
-                      ? "text-zinc-600 hover:text-primary"
-                      : "text-white/70 hover:text-white"
-                  )}
-                >
-                  {item.name}
-                  {item.submenu && <ChevronDown className="w-3 h-3 opacity-30 group-hover:rotate-180 transition-transform" />}
-                </Link>
+          {/* 2. Center: Primary Navigation */}
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+            {navItems.map((item) => {
+              const hasSubmenu = !!item.submenu;
 
-                {item.submenu && (
+              return (
+                <div
+                  key={item.name}
+                  className="relative"
+                  onMouseEnter={() => hasSubmenu && setActiveSubmenu(item.name)}
+                  onMouseLeave={() => hasSubmenu && setActiveSubmenu(null)}
+                >
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      "text-[10px] uppercase font-bold tracking-[0.2em] transition-all hover:text-accent whitespace-nowrap flex items-center gap-1.5",
+                      scrolled ? "text-primary" : "text-white/80",
+                      activeSubmenu === item.name && "text-accent"
+                    )}
+                  >
+                    {item.name}
+                    {hasSubmenu && (
+                      <ChevronDown className={cn(
+                        "w-3 h-3 transition-transform duration-300",
+                        activeSubmenu === item.name && "rotate-180"
+                      )} />
+                    )}
+                  </Link>
+
+                  {/* Dropdown Menu */}
                   <AnimatePresence>
-                    {activeSubmenu === item.name && (
+                    {hasSubmenu && activeSubmenu === item.name && (
                       <motion.div
                         initial={{ opacity: 0, y: 10, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                        className="absolute top-full left-0 w-72 bg-white shadow-3xl border border-zinc-100 rounded-3xl overflow-hidden py-6"
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        className="absolute left-1/2 -translate-x-1/2 top-full pt-4 w-64 z-50 pointer-events-auto"
                       >
-                        <div className="px-8 pb-4 mb-4 border-b border-zinc-50">
-                          <span className="text-[10px] font-bold text-accent tracking-widest uppercase">Niveles Educativos</span>
+                        <div className="bg-white rounded-2xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] border border-slate-100 p-2 overflow-hidden w-72">
+                          <div className="flex flex-col">
+                            {item.submenu?.map((sub) => (
+                              <Link
+                                key={sub.name}
+                                href={sub.href}
+                                className="group flex items-center justify-between p-4 rounded-xl hover:bg-slate-50 transition-all duration-300"
+                              >
+                                <div className="flex items-center gap-4">
+                                  <div className={cn("w-1.5 h-6 rounded-full", sub.color)} />
+                                  <div className="flex flex-col">
+                                    <span className="text-[10px] font-bold uppercase tracking-widest text-primary">
+                                      {sub.name}
+                                    </span>
+                                    <span className="text-[9px] text-emaus-gray font-light uppercase tracking-widest mt-0.5">
+                                       Colegio Emaús
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                                  <ChevronDown className="w-4 h-4 text-accent -rotate-90" />
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
                         </div>
-                        {item.submenu.map((sub) => (
-                          <Link
-                            key={sub.name}
-                            href={sub.href}
-                            className="flex px-8 py-3 text-sm text-zinc-900 hover:bg-zinc-50 hover:pl-10 transition-all items-center gap-4 group/item"
-                          >
-                            <span className={cn("w-2 h-2 rounded-full", sub.color)} />
-                            <span className="font-medium">{sub.name}</span>
-                          </Link>
-                        ))}
                       </motion.div>
                     )}
                   </AnimatePresence>
-                )}
-              </div>
-            ))}
-          </div>
+                </div>
+              );
+            })}
+          </nav>
 
-          {/* Desktop Nav Actions */}
-          <div className="hidden md:flex items-center gap-8">
-            <button
-              onClick={() => setIsHubOpen(true)}
-              className="group flex flex-col items-end gap-1"
-            >
-              <div className={cn(
-                "w-8 h-[2px] transition-all group-hover:w-12 group-hover:bg-accent",
-                scrolled ? "bg-primary" : "bg-white"
-              )} />
-              <div className={cn(
-                "w-5 h-[2px] transition-all group-hover:w-8 group-hover:bg-accent",
-                scrolled ? "bg-primary" : "bg-white"
-              )} />
-              <span className={cn(
-                "text-[9px] font-bold uppercase tracking-widest mt-1 transition-colors",
-                scrolled ? "text-primary/60 group-hover:text-accent" : "text-white/40 group-hover:text-white"
-              )}>
-                Explorar
-              </span>
-            </button>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="flex items-center md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className={cn(
-                "inline-flex items-center justify-center p-3 rounded-2xl transition-all",
-                scrolled ? "bg-primary text-white" : "bg-white/10 text-white backdrop-blur-md"
-              )}
-            >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
+          {/* 3. Right: CTA */}
+          <Link
+            href="/inscripciones"
+            className={cn(
+              "px-8 py-4 rounded-2xl font-bold uppercase tracking-[0.2em] text-[10px] transition-all shadow-xl whitespace-nowrap",
+              scrolled
+                ? "bg-primary text-white hover:bg-accent shadow-primary/10"
+                : "bg-white text-primary hover:bg-accent hover:text-white shadow-2xl"
+            )}
+          >
+            Inscribirme
+          </Link>
         </div>
       </nav>
 

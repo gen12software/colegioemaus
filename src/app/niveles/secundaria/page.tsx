@@ -1,4 +1,5 @@
 import PageHeader from "@/components/layout/PageHeader";
+import ComingSoon from "@/components/sections/ComingSoon";
 
 export default function SecundariaPage() {
   return (
@@ -8,9 +9,7 @@ export default function SecundariaPage() {
         subtitle="Colegio Emaús"
         image="/images/secundaria.png"
       />
-      <section className="max-w-7xl mx-auto py-24 px-8 text-center text-zinc-500">
-        <p className="text-xl">Estamos preparando el contenido detallado de esta sección para brindarte la mejor información.</p>
-      </section>
+      <ComingSoon />
     </main>
   );
 }

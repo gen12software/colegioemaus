@@ -12,7 +12,7 @@ const stages = [
     title: "Jardín de Infantes",
     subtitle: "El Inicio del Asombro",
     description: "Un espacio diseñado para el juego libre y dirigido, donde la curiosidad natural del niño es el motor de su primer gran aprendizaje.",
-    color: "#d97706",
+    color: "#E84446", // Brand Red
     image: "/images/jardin.png",
     href: "/niveles/jardin"
   },
@@ -21,7 +21,7 @@ const stages = [
     title: "Escuela Primaria",
     subtitle: "Cimientos de Excelencia",
     description: "Formación integral con enfoque bilingüe, robótica y valores cristianos. Preparamos ciudadanos del mundo con bases sólidas.",
-    color: "#be123c",
+    color: "#03529E", // Brand Blue Primary
     image: "/images/primaria.png",
     href: "/niveles/primaria"
   },
@@ -30,7 +30,7 @@ const stages = [
     title: "Escuela Secundaria",
     subtitle: "Liderazgo de Futuro",
     description: "Bachilleratos con orientación técnica y pedagógica. Fomentamos el pensamiento crítico y la autonomía universitaria.",
-    color: "#6d28d9",
+    color: "#4881B9", // Brand Blue Secondary
     image: "/images/secundaria.png",
     href: "/niveles/secundaria"
   },
@@ -39,7 +39,7 @@ const stages = [
     title: "Técnico Profesional",
     subtitle: "Maestría Tecnológica",
     description: "Especialización de vanguardia en Informática y Electromecánica. Laboratorios propios y convenios con empresas líderes.",
-    color: "#0891b2",
+    color: "#989999", // Brand Gray
     image: "/images/tecnica.png",
     href: "/niveles/tecnica"
   }
@@ -53,7 +53,7 @@ export default function Scrollytelling() {
   });
 
   return (
-    <section ref={containerRef} className="relative h-[450vh] bg-[#001122]">
+    <section ref={containerRef} className="relative h-[450vh] bg-[#0a0a0a]">
       <div className="sticky top-0 h-screen overflow-hidden">
         {stages.map((stage, index) => {
           const start = index / stages.length;
@@ -74,7 +74,7 @@ export default function Scrollytelling() {
             >
               <div className="max-w-7xl mx-auto w-full px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 {/* Visual Content */}
-                <div className="relative aspect-4/5 md:aspect-video lg:aspect-square rounded-[3rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border border-white/5 pointer-events-auto">
+                <div className="relative aspect-4/5 md:aspect-video lg:aspect-square rounded-4xl overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border border-white/5 pointer-events-auto">
                     <motion.img
                       style={{ scale }}
                       src={stage.image}
@@ -82,10 +82,10 @@ export default function Scrollytelling() {
                       className="w-full h-full object-cover"
                     />
                     {/* Dynamic Overlay per Stage */}
-                    <div className="absolute inset-0 bg-linear-to-t from-[#001122] via-transparent to-transparent opacity-60" />
+                    <div className="absolute inset-0 bg-linear-to-t from-primary via-transparent to-transparent opacity-60" />
                     <div 
                         className="absolute top-10 left-10 w-20 h-20 rounded-3xl backdrop-blur-2xl border border-white/20 flex items-center justify-center text-4xl font-bold text-white shadow-2xl"
-                        style={{ background: `${stage.color}22` }}
+                        style={{ background: `${stage.color}44` }}
                     >
                         {stage.title[0]}
                     </div>
@@ -137,7 +137,7 @@ export default function Scrollytelling() {
                 // eslint-disable-next-line react-hooks/rules-of-hooks
                 const dashScale = useTransform(scrollYProgress, [start, start + 0.1, end - 0.1, end], [1, 1.8, 1.8, 1]);
                 // eslint-disable-next-line react-hooks/rules-of-hooks
-                const dotColor = useTransform(scrollYProgress, [start, start + 0.1, end - 0.1, end], ["#ffffff22", "#c5a059", "#c5a059", "#ffffff22"]);
+                const dotColor = useTransform(scrollYProgress, [start, start + 0.1, end - 0.1, end], ["#ffffff22", "#E84446", "#E84446", "#ffffff22"]);
 
                 return (
                     <div key={i} className="flex flex-col items-center gap-2">

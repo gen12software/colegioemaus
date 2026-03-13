@@ -12,11 +12,11 @@ interface PageHeaderProps {
 
 export default function PageHeader({ title, subtitle, image, className }: PageHeaderProps) {
   return (
-    <section className={cn("relative h-[45vh] flex items-center justify-center overflow-hidden bg-[#001a35] pt-20", className)}>
+    <section className={cn("relative h-[45vh] flex items-center justify-center overflow-hidden bg-[#0a0a0a] pt-20", className)}>
       {/* Background with overlay */}
       <div className="absolute inset-0 z-0">
         {/* Dark cinematic overlay */}
-        <div className="absolute inset-0 bg-linear-to-b from-[#001a35]/90 via-[#001a35]/60 to-[#001a35] z-10" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/40 via-primary/60 to-black/80 z-10" />
         
         {image ? (
           <img 
@@ -25,7 +25,7 @@ export default function PageHeader({ title, subtitle, image, className }: PageHe
             className="w-full h-full object-cover object-center scale-105"
           />
         ) : (
-          <div className="w-full h-full bg-[radial-gradient(circle_at_20%_20%,#c5a059_0%,transparent_50%)] opacity-30" />
+          <div className="w-full h-full bg-[radial-gradient(circle_at_20%_20%,#4881B9_0%,transparent_50%)] opacity-30" />
         )}
       </div>
 
@@ -40,11 +40,11 @@ export default function PageHeader({ title, subtitle, image, className }: PageHe
           </h1>
           {subtitle && (
             <div className="flex items-center justify-center gap-4">
-              <div className="h-px w-8 bg-accent/50" />
+              <div className="h-px w-8 bg-accent/60" />
               <p className="text-sm md:text-base text-accent font-bold uppercase tracking-[0.4em]">
                 {subtitle}
               </p>
-              <div className="h-px w-8 bg-accent/50" />
+              <div className="h-px w-8 bg-accent/60" />
             </div>
           )}
         </motion.div>

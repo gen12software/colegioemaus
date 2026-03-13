@@ -1,13 +1,13 @@
 import PageHeader from "@/components/layout/PageHeader";
 import ComingSoon from "@/components/sections/ComingSoon";
 
-export default function JardinPage() {
+export default function InscripcionesPage() {
   return (
     <main className="min-h-screen bg-white">
       <PageHeader 
-        title="Jardin de Infantes" 
-        subtitle="Colegio Emaús"
-        image="/images/jardin.png"
+        title="Inscripciones" 
+        subtitle="Formá parte de nuestra comunidad"
+        image="/images/hero.png"
       />
       <ComingSoon />
     </main>

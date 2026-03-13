@@ -1,7 +1,8 @@
 "use client";
 
 import Hero from "@/components/sections/Hero";
-import Scrollytelling from "@/components/sections/Scrollytelling";
+import LevelsExplorer from "@/components/sections/LevelsExplorer";
+import ResourceCenter from "@/components/sections/ResourceCenter";
 import { ArrowRight, BookOpen, Users, Trophy, Globe, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -10,101 +11,99 @@ export default function Home() {
   return (
     <main className="bg-primary">
       <Hero />
-      
-      {/* Identity Bento - Value Proposition */}
-      <section className="py-32 px-6 bg-white rounded-[4rem] md:rounded-[6rem] -mt-16 relative z-20">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-20 text-center max-w-2xl mx-auto">
-            <span className="text-secondary/40 font-bold tracking-[0.4em] uppercase text-xs mb-4 block">Nuestra Identidad</span>
-            <h2 className="text-4xl md:text-6xl text-primary font-display font-medium leading-[0.9] tracking-tighter">
-              Excelencia que se vive en cada <span className="text-accent italic">detalle.</span>
-            </h2>
+
+      <LevelsExplorer />
+
+      <ResourceCenter />
+
+      {/* Identity - Minimalist Redesign */}
+      <section className="py-48 px-6 bg-slate-50 relative z-20 overflow-hidden">
+        {/* Subtle Brand Watermark */}
+        <div className="absolute top-0 right-0 text-[20rem] font-display font-black text-primary/2 select-none pointer-events-none translate-x-1/4 -translate-y-1/4">
+          EMAUS
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="mb-40">
+            <motion.span
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="text-accent font-bold tracking-[0.6em] uppercase text-[10px] mb-8 block"
+            >
+              Nuestra Esencia
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="text-6xl md:text-[10rem] text-primary font-display font-medium leading-[0.75] tracking-tighter max-w-5xl"
+            >
+              Excelencia que se vive en cada <span className="text-secondary italic font-light">detalle.</span>
+            </motion.h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <div className="md:col-span-2 p-12 rounded-[3.5rem] bg-secondary text-white flex flex-col justify-between group overflow-hidden relative">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2 group-hover:bg-accent/20 transition-colors" />
-              <Globe className="w-12 h-12 text-accent mb-12" />
-              <div>
-                <h3 className="text-3xl font-display font-bold mb-4">Idiomas & Cultura</h3>
-                <p className="text-white/60 text-lg leading-relaxed max-w-sm">
-                  Enfoque bicultural con certificaciones internacionales y viajes de intercambio.
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-t border-primary/10 pt-20">
+            {[
+              { title: "Cultura Global", desc: "Enfoque bicultural con certificaciones Cambridge e intercambios internacionales." },
+              { title: "Innovación", desc: "Robótica avanzada y programación aplicada desde niveles iniciales." },
+              { title: "Formación Ética", desc: "Valores que forjan un carácter resiliente y gran compromiso social." },
+              { title: "Comunidad", desc: "Un entorno familiar donde los padres son protagonistas del crecimiento." }
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                className="group"
+              >
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-10 h-px bg-accent group-hover:w-16 transition-all duration-700" />
+                  <h3 className="text-xs uppercase tracking-[0.3em] font-bold text-primary">{item.title}</h3>
+                </div>
+                <p className="text-primary/60 text-lg font-light leading-relaxed">
+                  {item.desc}
                 </p>
-              </div>
-            </div>
-
-            <div className="p-12 rounded-[3.5rem] bg-zinc-50 border border-zinc-100 flex flex-col justify-between hover:border-accent/30 transition-all">
-              <BookOpen className="w-10 h-10 text-secondary mb-8" />
-              <div>
-                <h3 className="text-xl font-bold text-primary mb-2">Innovación</h3>
-                <p className="text-zinc-500 text-sm">Robótica y programación aplicada.</p>
-              </div>
-            </div>
-
-            <div className="p-12 rounded-[3.5rem] bg-accent text-primary flex flex-col justify-between hover:scale-[1.02] transition-transform">
-              <Trophy className="w-10 h-10 mb-8" />
-              <div>
-                <h3 className="text-xl font-bold mb-2">Deporte</h3>
-                <p className="text-primary/60 text-sm">Competencias intercolegiales y formación física.</p>
-              </div>
-            </div>
-
-            <div className="lg:col-span-1 p-12 rounded-[3.5rem] bg-zinc-50 border border-zinc-100 flex flex-col justify-between">
-               <Users className="w-10 h-10 text-secondary mb-8" />
-               <div>
-                  <h3 className="text-xl font-bold text-primary mb-2">Comunidad</h3>
-                  <p className="text-zinc-500 text-sm">Presencia activa de las familias.</p>
-               </div>
-            </div>
-
-            <div className="md:col-span-2 lg:col-span-3 p-12 rounded-[3.5rem] bg-zinc-900 text-white flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group">
-               <div className="relative z-10">
-                  <h3 className="text-3xl md:text-4xl font-display font-bold mb-4">Proyecto Pastoral</h3>
-                  <p className="text-white/40 text-lg max-w-md">Descubrí cómo formamos el corazón a través de la solidaridad y la fe.</p>
-               </div>
-               <Link href="/pastoral" className="relative z-10 w-20 h-20 rounded-full bg-accent flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                  <ArrowRight className="w-8 h-8" />
-               </Link>
-               <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_20%,rgba(197,160,89,0.05)_0%,transparent_50%)]" />
-            </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      <Scrollytelling />
-
-      {/* Pre-footer Optimized CTA */}
-      <section className="py-40 px-6 bg-[#f1f5f9] text-primary rounded-[4rem] md:rounded-[6rem] -mb-16 relative z-20 overflow-hidden">
+      {/* CTA Final - High-End Signature */}
+      <section className="py-64 px-6 bg-white relative z-20 overflow-hidden">
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
+            transition={{ duration: 1.2 }}
           >
-            <h2 className="text-5xl md:text-8xl font-display font-medium mb-10 tracking-tighter">
-              ¿Listo para dar el <br /> <span className="text-accent italic">primer paso?</span>
+            <h2 className="text-7xl md:text-[14rem] font-display font-medium text-primary mb-16 tracking-tighter leading-[0.7]">
+              Forjamos <br /> <span className="text-secondary italic font-extralight">Legados.</span>
             </h2>
-            <p className="text-xl text-primary/60 mb-16 max-w-2xl mx-auto font-light leading-relaxed">
-              Vení a conocer nuestras instalaciones y descubrí por qué somos la elección de miles de familias desde hace más de 60 años.
+            <p className="text-2xl md:text-3xl text-primary/40 mb-32 max-w-2xl mx-auto font-light leading-relaxed">
+              Vení a conocer nuestras instalaciones y descubrí por qué somos la elección de miles de familias.
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-10 justify-center items-center">
               <Link
                 href="/inscripciones"
-                className="px-12 py-6 rounded-2xl bg-primary text-white font-bold hover:bg-accent hover:text-white transition-all shadow-2xl uppercase tracking-widest text-sm"
+                className="group px-20 py-10 rounded-2xl bg-primary text-white font-bold hover:bg-accent transition-all duration-700 shadow-3xl uppercase tracking-[0.4em] text-[11px] relative overflow-hidden"
               >
-                Inscribirme Ahora
+                <span className="relative z-10">Inscribirme Ahora</span>
+                <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-700" />
               </Link>
               <Link
                 href="/contacto"
-                className="px-12 py-6 rounded-2xl bg-white text-primary border border-primary/10 font-bold hover:bg-zinc-50 transition-all uppercase tracking-widest text-sm"
+                className="group px-20 py-10 rounded-2xl bg-white text-primary border border-primary/10 font-bold hover:bg-slate-50 transition-all uppercase tracking-[0.4em] text-[11px] shadow-2xl flex items-center gap-3"
               >
-                Más Información
+                Entrevista Personal
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
               </Link>
             </div>
           </motion.div>
         </div>
-        {/* Subtle Decorative elements */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/5 blur-[120px] rounded-full pointer-events-none" />
+        {/* High-end atmospheric gradients */}
+        <div className="absolute top-0 right-[-10%] w-[1000px] h-[1000px] bg-accent/5 blur-[200px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-0 left-[-10%] w-[1000px] h-[1000px] bg-secondary/5 blur-[200px] rounded-full pointer-events-none" />
       </section>
     </main>
   );

@@ -9,18 +9,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#001a35",
-        secondary: "#002d5b",
-        accent: "#c5a059",
+        primary: "#03529E",
+        secondary: "#4881B9",
+        accent: "#E84446",
+        "emaus-gray": "#989999",
         silver: "#f1f5f9",
-        "nivel-jardin": "#d97706",
-        "nivel-primaria": "#be123c",
-        "nivel-secundaria": "#6d28d9",
-        "nivel-tecnica": "#0891b2",
+        "nivel-jardin": "#E84446",
+        "nivel-primaria": "#03529E",
+        "nivel-secundaria": "#4881B9",
+        "nivel-tecnica": "#989999",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "ui-sans-serif", "system-ui"],
         display: ["var(--font-outfit)", "ui-sans-serif", "system-ui"],
+      },
+      borderRadius: {
+        "4xl": "2.5rem",
       },
     },
   },

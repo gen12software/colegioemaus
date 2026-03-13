@@ -1,28 +1,40 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #03529E;
+  --color-secondary: #4881B9;
+  --color-accent: #E84446;
+  --color-emaus-gray: #989999;
+  
+  --font-display: var(--font-outfit), ui-sans-serif, system-ui;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui;
+
+  --radius-4xl: 2.5rem;
+}
+
 :root {
-  --background: #001a35;
-  --foreground: #ffffff;
+  --background: #ffffff;
+  --foreground: #03529E;
   
   /* Colegio Emaús Brand Colors - Raw Variables for JS/Framer */
-  --brand-primary: #001a35;
-  --brand-secondary: #002d5b;
-  --brand-accent: #c5a059;
-  --brand-silver: #f1f5f9;
+  --brand-primary: #03529E;
+  --brand-secondary: #4881B9;
+  --brand-accent: #E84446;
+  --brand-gray: #989999;
   
-  /* Levels Palette */
-  --nivel-jardin: #d97706;
-  --nivel-primaria: #be123c;
-  --nivel-secundaria: #6d28d9;
-  --nivel-tecnica: #0891b2;
+  /* Levels Palette - Aligned with institutional colors */
+  --nivel-jardin: #E84446; /* Accent */
+  --nivel-primaria: #03529E; /* Primary */
+  --nivel-secundaria: #4881B9; /* Secondary */
+  --nivel-tecnica: #989999; /* Gray */
 
   --font-inter: var(--font-inter);
   --font-outfit: var(--font-outfit);
 }
 
 body {
-  background-color: var(--brand-primary);
-  color: white;
+  background-color: white;
+  color: #1a1a1a;
   font-family: var(--font-inter), ui-sans-serif, system-ui;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -46,8 +58,8 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.text-gradient-gold {
-  background-image: linear-gradient(to bottom, var(--brand-accent), #e5c07b, var(--brand-accent));
+.text-gradient-brand {
+  background-image: linear-gradient(to bottom, var(--brand-accent), var(--brand-secondary), var(--brand-accent));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
